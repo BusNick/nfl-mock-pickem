@@ -32,87 +32,56 @@
     border-bottom: 1px solid var(--border);
     background: linear-gradient(180deg, rgba(255,59,59,0.08), transparent);
   }
-  h1 {
-    margin: 0 0 6px;
-    font-size: 28px;
-    letter-spacing: 0.3px;
-  }
+  h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: 0.3px; }
   .sub { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
-  nav.tabs {
-    display: flex; gap: 6px; flex-wrap: wrap;
-  }
+  nav.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   nav.tabs button {
-    background: var(--panel);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 8px 14px;
-    border-radius: 8px 8px 0 0;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    padding: 8px 14px; border-radius: 8px 8px 0 0; cursor: pointer;
+    font-weight: 600; font-size: 14px;
   }
-  nav.tabs button.active {
-    background: var(--panel-2);
-    border-bottom-color: var(--panel-2);
-    color: var(--gold);
-  }
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px;
-  }
+  nav.tabs button.active { background: var(--panel-2); border-bottom-color: var(--panel-2); color: var(--gold); }
+  main { max-width: 1100px; margin: 0 auto; padding: 20px; }
   section.tab { display: none; }
   section.tab.active { display: block; }
   .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-    margin-bottom: 18px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px; margin-bottom: 18px;
     box-shadow: var(--shadow);
   }
   h2 { margin: 0 0 12px; font-size: 20px; }
   h3 { margin: 16px 0 8px; font-size: 16px; color: var(--accent-2); }
   label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
   input[type=text], input[type=number], textarea, select {
-    width: 100%;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 9px 10px;
-    border-radius: 7px;
-    font: inherit;
+    width: 100%; background: var(--panel-2);
+    border: 1px solid var(--border); color: var(--text);
+    padding: 9px 10px; border-radius: 7px; font: inherit;
   }
-  input[type=text]:focus, textarea:focus, select:focus {
-    outline: none;
-    border-color: var(--accent-2);
-  }
+  input[type=text]:focus, textarea:focus, select:focus { outline: none; border-color: var(--accent-2); }
   textarea { min-height: 90px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13px; }
   button.primary {
     background: linear-gradient(180deg, #ff5a5a, #cc1f1f);
     border: none; color: white; font-weight: 700;
-    padding: 10px 16px; border-radius: 8px; cursor: pointer;
-    font-size: 14px;
+    padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px;
   }
   button.primary:hover { filter: brightness(1.1); }
   button.secondary {
-    background: var(--panel-2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 8px 14px; border-radius: 8px; cursor: pointer;
-    font-size: 13px;
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); padding: 8px 14px;
+    border-radius: 8px; cursor: pointer; font-size: 13px;
   }
   button.secondary:hover { border-color: var(--accent-2); color: var(--accent-2); }
   .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
   .row > * { flex: 1 1 auto; }
   .pick-grid {
     display: grid;
-    grid-template-columns: 48px 1fr 1.6fr;
-    gap: 8px 10px;
-    align-items: center;
+    grid-template-columns: 48px 1fr 1.8fr;
+    gap: 10px 10px;
+    align-items: start;
   }
-  .pick-grid .hd { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
-  .pick-num { font-weight: 800; color: var(--gold); text-align: center; font-size: 16px; }
+  .pick-grid .hd { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; padding-top: 6px; }
+  .pick-num { font-weight: 800; color: var(--gold); text-align: center; font-size: 16px; padding-top: 10px; }
+  .team-col { padding-top: 10px; }
   .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
   .pill.green { background: rgba(61,220,132,0.15); color: var(--green); }
   .pill.orange { background: rgba(255,158,59,0.15); color: var(--orange); }
@@ -131,20 +100,59 @@
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: var(--panel-2); border: 1px solid var(--border);
     padding: 10px 16px; border-radius: 8px; box-shadow: var(--shadow);
-    opacity: 0; transition: opacity 0.25s;
-    pointer-events: none; z-index: 100;
+    opacity: 0; transition: opacity 0.25s; pointer-events: none; z-index: 100;
   }
   .toast.show { opacity: 1; }
-  .setup-grid {
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 6px 10px;
-    align-items: center;
-  }
+  .setup-grid { display: grid; grid-template-columns: 48px 1fr; gap: 6px 10px; align-items: center; }
   .small { font-size: 12px; color: var(--muted); }
+
+  /* Combobox */
+  .combo-wrap { position: relative; }
+  .combo-wrap .combo-input { padding-right: 32px; width: 100%; }
+  .combo-wrap .combo-clear {
+    position: absolute; top: 50%; right: 6px; transform: translateY(-50%);
+    background: transparent; border: none; color: var(--muted);
+    font-size: 20px; cursor: pointer; padding: 2px 8px; line-height: 1;
+    display: none;
+  }
+  .combo-wrap.has-value .combo-clear { display: block; }
+  .combo-wrap .combo-clear:hover { color: var(--accent); }
+  .combo-wrap .combo-menu {
+    display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 7px; max-height: 300px; overflow-y: auto;
+    z-index: 50; box-shadow: var(--shadow);
+  }
+  .combo-wrap.open .combo-menu { display: block; }
+  .combo-item {
+    padding: 8px 12px; font-size: 13px; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.04);
+    user-select: none;
+  }
+  .combo-item:last-child { border-bottom: none; }
+  .combo-item:hover:not(.disabled) { background: var(--panel-2); color: var(--accent-2); }
+  .combo-item.disabled {
+    color: var(--muted); opacity: 0.45; cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  .combo-item .player-meta {
+    font-size: 10px; color: var(--muted); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.4px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .combo-item.disabled .used-tag {
+    font-size: 10px; color: var(--accent); font-weight: 700;
+    text-decoration: none; white-space: nowrap;
+  }
+  .combo-empty {
+    padding: 10px 12px; color: var(--muted); font-size: 12px; font-style: italic;
+  }
+
   @media (max-width: 640px) {
     .pick-grid { grid-template-columns: 40px 1fr; }
-    .pick-grid .team-col { grid-column: 2; font-size: 12px; color: var(--muted); }
+    .pick-grid .team-col { grid-column: 2; font-size: 12px; color: var(--muted); padding-top: 0; }
     .pick-grid .player-col { grid-column: 1 / -1; }
     h1 { font-size: 22px; }
   }
@@ -186,7 +194,7 @@
       <div class="hd">Team</div>
       <div class="hd">Your Pick</div>
     </div>
-    <datalist id="prospectList"></datalist>
+    <div class="small" style="margin-top: 10px;">Click a pick slot and start typing to filter. Already-picked players are grayed out.</div>
   </div>
 
   <div class="card">
@@ -253,13 +261,13 @@ https://yoursite.com/#p=..."></textarea>
   <div class="card">
     <h2>Setup (Commissioner)</h2>
     <div class="small">
-      Edit the team draft order and (optional) prospect autocomplete list, then generate a config link to share with your friends. Default order below reflects the <strong>actual 2026 NFL Draft order as of Apr 20, 2026</strong> (including trades). Edit if any picks get traded during the draft itself.
+      Edit the team draft order and prospect pool, then generate a config link to share with your friends. Defaults reflect the <strong>actual 2026 NFL Draft order as of Apr 20, 2026</strong> (trades included) plus Tankathon's top 50 big board.
     </div>
   </div>
 
   <div class="card">
     <h3>Draft Order (Picks 1–32)</h3>
-    <div class="small" style="margin-bottom: 10px;">Edit team names as needed. Reorder by cutting & pasting values.</div>
+    <div class="small" style="margin-bottom: 10px;">Edit team names as needed. Re-order via cut & paste.</div>
     <div class="setup-grid" id="setupGrid"></div>
     <div style="margin-top: 12px;">
       <button class="secondary" id="resetTeams">Reset to 2026 draft order</button>
@@ -267,18 +275,22 @@ https://yoursite.com/#p=..."></textarea>
   </div>
 
   <div class="card">
-    <h3>Prospect Autocomplete List</h3>
-    <div class="small" style="margin-bottom: 6px;">One player per line. Friends will see these as suggestions when making picks. Leave blank to skip autocomplete.</div>
-    <textarea id="prospectsInput" placeholder="Caleb Williams
-Marvin Harrison Jr.
-Jayden Daniels
+    <h3>Prospect Pool</h3>
+    <div class="small" style="margin-bottom: 6px;">
+      One player per line. Format: <code>Name (POS, School)</code> — or just <code>Name</code>. Friends will pick from this list in their dropdowns.
+    </div>
+    <textarea id="prospectsInput" style="min-height: 220px;" placeholder="Fernando Mendoza (QB, Indiana)
+Caleb Downs (S, Ohio State)
 ..."></textarea>
+    <div style="margin-top: 10px;">
+      <button class="secondary" id="resetProspects">Reset to top-50 big board</button>
+    </div>
   </div>
 
   <div class="card">
     <h2>Share Your Configured Link</h2>
     <div class="small" style="margin-bottom: 10px;">
-      Click to generate a link that has your team order + prospect list baked in. Share this with friends (or just host the whole site on GitHub Pages — see "How It Works").
+      Click to generate a link that has your team order + prospect pool baked in. Share this with friends.
     </div>
     <button class="primary" id="generateConfig">Generate Config Link</button>
     <div id="configOutput" style="margin-top: 12px; display: none;">
@@ -299,9 +311,8 @@ Jayden Daniels
 
     <h3>For you (the commissioner):</h3>
     <ol>
-      <li>Open the <strong>Setup</strong> tab. Reorder the 32 teams to match the real 2026 draft order (including trades).</li>
-      <li>(Optional) Paste a top-prospects list so friends get autocomplete suggestions.</li>
-      <li>Click "Generate Config Link" and copy it. <strong>This is the link you send to your friends.</strong></li>
+      <li>Open the <strong>Setup</strong> tab. Adjust the team order and prospect pool if needed.</li>
+      <li>Click "Generate Config Link" and copy it. <strong>This is the link you send to your friends.</strong> (Or just send them the plain site URL — defaults are already good.)</li>
       <li>During the draft, open the <strong>Admin</strong> tab. Paste friends' submitted links into the top textarea and hit "Load Entries".</li>
       <li>As each real pick happens, type the player name into the "Actual Results" row for that pick. Scoreboard updates live.</li>
     </ol>
@@ -309,7 +320,7 @@ Jayden Daniels
     <h3>For your friends:</h3>
     <ol>
       <li>They open the link you sent.</li>
-      <li>On the <strong>Make Picks</strong> tab, they type their name and 32 player picks.</li>
+      <li>On the <strong>Make Picks</strong> tab, they type their name and pick 32 players from the dropdowns.</li>
       <li>They click "Generate My Picks Link", copy it, and text/DM it back to you.</li>
     </ol>
 
@@ -320,18 +331,6 @@ Jayden Daniels
       <li><strong>2 points</strong> — within 5 picks</li>
       <li><strong>1 point</strong>  — player picked anywhere in round 1</li>
     </ul>
-
-    <h3>Hosting on GitHub Pages (free)</h3>
-    <ol>
-      <li>Sign up / log in at <a href="https://github.com" target="_blank" style="color: var(--accent-2);">github.com</a> (free).</li>
-      <li>Create a new public repo, e.g. <code>nfl-mock-pickem</code>.</li>
-      <li>Upload this <code>index.html</code> to the repo (drag-and-drop works).</li>
-      <li>In the repo: Settings → Pages → Source: "Deploy from branch" → Branch: <code>main</code> / root → Save.</li>
-      <li>In about a minute, your site is live at <code>https://&lt;yourusername&gt;.github.io/nfl-mock-pickem/</code>.</li>
-      <li>Send that URL to your friends.</li>
-    </ol>
-
-    <p class="small">No hosting fees, ever. Works on phones. No accounts needed for friends.</p>
   </div>
 </section>
 
@@ -340,45 +339,75 @@ Jayden Daniels
 <div class="toast" id="toast"></div>
 
 <script>
-  // ------- 2026 NFL Draft order (source: Tankathon, as of Apr 20 2026) -------
+  // ------- 2026 NFL Draft order (Tankathon, as of Apr 20 2026) -------
   const DEFAULT_TEAMS = [
-    "Las Vegas Raiders",
-    "New York Jets",
-    "Arizona Cardinals",
-    "Tennessee Titans",
-    "New York Giants",
-    "Cleveland Browns",
-    "Washington Commanders",
-    "New Orleans Saints",
-    "Kansas City Chiefs",
-    "New York Giants (via CIN)",
-    "Miami Dolphins",
-    "Dallas Cowboys",
-    "Los Angeles Rams (via ATL)",
-    "Baltimore Ravens",
-    "Tampa Bay Buccaneers",
-    "New York Jets (via IND)",
-    "Detroit Lions",
-    "Minnesota Vikings",
-    "Carolina Panthers",
-    "Dallas Cowboys (via GB)",
-    "Pittsburgh Steelers",
-    "Los Angeles Chargers",
-    "Philadelphia Eagles",
-    "Cleveland Browns (via JAX)",
-    "Chicago Bears",
-    "Buffalo Bills",
-    "San Francisco 49ers",
-    "Houston Texans",
-    "Kansas City Chiefs (via LAR)",
-    "Miami Dolphins (via DEN)",
-    "New England Patriots",
-    "Seattle Seahawks"
+    "Las Vegas Raiders","New York Jets","Arizona Cardinals","Tennessee Titans",
+    "New York Giants","Cleveland Browns","Washington Commanders","New Orleans Saints",
+    "Kansas City Chiefs","New York Giants (via CIN)","Miami Dolphins","Dallas Cowboys",
+    "Los Angeles Rams (via ATL)","Baltimore Ravens","Tampa Bay Buccaneers","New York Jets (via IND)",
+    "Detroit Lions","Minnesota Vikings","Carolina Panthers","Dallas Cowboys (via GB)",
+    "Pittsburgh Steelers","Los Angeles Chargers","Philadelphia Eagles","Cleveland Browns (via JAX)",
+    "Chicago Bears","Buffalo Bills","San Francisco 49ers","Houston Texans",
+    "Kansas City Chiefs (via LAR)","Miami Dolphins (via DEN)","New England Patriots","Seattle Seahawks"
+  ];
+
+  // ------- Default prospect pool (Tankathon top-50 big board, 2026) -------
+  const DEFAULT_PROSPECTS = [
+    { name: "Arvell Reese", pos: "LB/EDGE", school: "Ohio State" },
+    { name: "Caleb Downs", pos: "S", school: "Ohio State" },
+    { name: "Fernando Mendoza", pos: "QB", school: "Indiana" },
+    { name: "David Bailey", pos: "EDGE", school: "Texas Tech" },
+    { name: "Jeremiyah Love", pos: "RB", school: "Notre Dame" },
+    { name: "Sonny Styles", pos: "LB", school: "Ohio State" },
+    { name: "Rueben Bain Jr.", pos: "EDGE", school: "Miami" },
+    { name: "Francis Mauigoa", pos: "OT", school: "Miami" },
+    { name: "Carnell Tate", pos: "WR", school: "Ohio State" },
+    { name: "Mansoor Delane", pos: "CB", school: "LSU" },
+    { name: "Spencer Fano", pos: "OT", school: "Utah" },
+    { name: "Makai Lemon", pos: "WR", school: "USC" },
+    { name: "Jordyn Tyson", pos: "WR", school: "Arizona State" },
+    { name: "Monroe Freeling", pos: "OT", school: "Georgia" },
+    { name: "Vega Ioane", pos: "IOL", school: "Penn State" },
+    { name: "Dillon Thieneman", pos: "S", school: "Oregon" },
+    { name: "Jermod McCoy", pos: "CB", school: "Tennessee" },
+    { name: "Kenyon Sadiq", pos: "TE", school: "Oregon" },
+    { name: "Kadyn Proctor", pos: "OT", school: "Alabama" },
+    { name: "Keldric Faulk", pos: "EDGE", school: "Auburn" },
+    { name: "Akheem Mesidor", pos: "EDGE", school: "Miami" },
+    { name: "Avieon Terrell", pos: "CB", school: "Clemson" },
+    { name: "Caleb Lomu", pos: "OT", school: "Utah" },
+    { name: "Omar Cooper Jr.", pos: "WR", school: "Indiana" },
+    { name: "Peter Woods", pos: "DL", school: "Clemson" },
+    { name: "Emmanuel McNeil-Warren", pos: "S", school: "Toledo" },
+    { name: "KC Concepcion", pos: "WR", school: "Texas A&M" },
+    { name: "Denzel Boston", pos: "WR", school: "Washington" },
+    { name: "Kayden McDonald", pos: "DL", school: "Ohio State" },
+    { name: "Colton Hood", pos: "CB", school: "Tennessee" },
+    { name: "T.J. Parker", pos: "EDGE", school: "Clemson" },
+    { name: "Blake Miller", pos: "OT", school: "Clemson" },
+    { name: "Ty Simpson", pos: "QB", school: "Alabama" },
+    { name: "CJ Allen", pos: "LB", school: "Georgia" },
+    { name: "Cashius Howell", pos: "EDGE", school: "Texas A&M" },
+    { name: "Caleb Banks", pos: "DL", school: "Florida" },
+    { name: "Max Iheanachor", pos: "OT", school: "Arizona State" },
+    { name: "Zion Young", pos: "EDGE", school: "Missouri" },
+    { name: "Brandon Cisse", pos: "CB", school: "South Carolina" },
+    { name: "Emmanuel Pregnon", pos: "IOL", school: "Oregon" },
+    { name: "Chris Johnson", pos: "CB", school: "San Diego State" },
+    { name: "Jacob Rodriguez", pos: "LB", school: "Texas Tech" },
+    { name: "Anthony Hill Jr.", pos: "LB", school: "Texas" },
+    { name: "Christen Miller", pos: "DL", school: "Georgia" },
+    { name: "Jadarian Price", pos: "RB", school: "Notre Dame" },
+    { name: "Lee Hunter", pos: "DL", school: "Texas Tech" },
+    { name: "D'Angelo Ponds", pos: "CB", school: "Indiana" },
+    { name: "Chase Bisontis", pos: "IOL", school: "Texas A&M" },
+    { name: "R Mason Thomas", pos: "EDGE", school: "Oklahoma" },
+    { name: "Germie Bernard", pos: "WR", school: "Alabama" }
   ];
 
   // ------- State -------
   let teams = DEFAULT_TEAMS.slice();
-  let prospects = [];
+  let prospects = DEFAULT_PROSPECTS.slice();
 
   // ------- Utilities -------
   function toast(msg) {
@@ -389,7 +418,6 @@ Jayden Daniels
     t._timer = setTimeout(() => t.classList.remove('show'), 1800);
   }
 
-  // base64 URL-safe encode of JSON
   function encodeData(obj) {
     const json = JSON.stringify(obj);
     const b64 = btoa(unescape(encodeURIComponent(json)));
@@ -399,11 +427,8 @@ Jayden Daniels
     try {
       let b64 = s.replace(/-/g, '+').replace(/_/g, '/');
       while (b64.length % 4) b64 += '=';
-      const json = decodeURIComponent(escape(atob(b64)));
-      return JSON.parse(json);
-    } catch (e) {
-      return null;
-    }
+      return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    } catch (e) { return null; }
   }
 
   function parseHash(hash) {
@@ -417,7 +442,6 @@ Jayden Daniels
     return out;
   }
 
-  // Normalize player names for comparison
   function normalizeName(s) {
     return (s || '')
       .toLowerCase()
@@ -427,124 +451,209 @@ Jayden Daniels
       .trim();
   }
 
+  // Parse/serialize prospect textarea lines
+  function parseProspectLine(line) {
+    line = (line || '').trim();
+    if (!line) return null;
+    // "Name (POS, School)" or "Name (POS)"
+    const m = line.match(/^(.+?)\s*\(\s*([^,)]+?)\s*(?:,\s*(.+?)\s*)?\)\s*$/);
+    if (m) return { name: m[1].trim(), pos: m[2].trim(), school: (m[3] || '').trim() };
+    return { name: line, pos: '', school: '' };
+  }
+  function serializeProspect(p) {
+    if (!p || !p.name) return '';
+    if (p.pos && p.school) return `${p.name} (${p.pos}, ${p.school})`;
+    if (p.pos) return `${p.name} (${p.pos})`;
+    return p.name;
+  }
+
   // ------- Tabs -------
   function setTab(name) {
-    document.querySelectorAll('nav.tabs button').forEach(b => {
-      b.classList.toggle('active', b.dataset.tab === name);
-    });
-    document.querySelectorAll('section.tab').forEach(s => {
-      s.classList.toggle('active', s.id === 'tab-' + name);
-    });
+    document.querySelectorAll('nav.tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+    document.querySelectorAll('section.tab').forEach(s => s.classList.toggle('active', s.id === 'tab-' + name));
   }
   document.querySelectorAll('nav.tabs button').forEach(btn => {
     btn.addEventListener('click', () => setTab(btn.dataset.tab));
   });
 
-  // ------- Build pick grid (picks tab) -------
+  // ------- Combobox factory -------
+  function makeCombo({ kind, idx, onChange }) {
+    const wrap = document.createElement('div');
+    wrap.className = 'combo-wrap player-col';
+    wrap.dataset.idx = idx;
+    wrap.dataset.kind = kind;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = kind === 'pick' ? 'combo-input pick-input' : 'combo-input actual-input';
+    input.placeholder = 'Click to select…';
+    input.dataset.idx = idx;
+    input.autocomplete = 'off';
+    input.spellcheck = false;
+
+    const clearBtn = document.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'combo-clear';
+    clearBtn.textContent = '×';
+    clearBtn.title = 'Clear';
+
+    const menu = document.createElement('div');
+    menu.className = 'combo-menu';
+
+    wrap.appendChild(input);
+    wrap.appendChild(clearBtn);
+    wrap.appendChild(menu);
+
+    function updateHasValue() {
+      wrap.classList.toggle('has-value', !!input.value.trim());
+    }
+
+    function findUsedElsewhere() {
+      const used = {};
+      const sel = kind === 'pick' ? '.pick-input' : '.actual-input';
+      document.querySelectorAll(sel).forEach(inp => {
+        const i = parseInt(inp.dataset.idx, 10);
+        if (i === idx) return;
+        const v = (inp.value || '').trim();
+        const n = normalizeName(v);
+        if (n && !(n in used)) used[n] = i + 1;
+      });
+      return used;
+    }
+
+    function renderMenu() {
+      const q = (input.value || '').toLowerCase().trim();
+      const used = findUsedElsewhere();
+      menu.innerHTML = '';
+      let matchCount = 0;
+
+      prospects.forEach(p => {
+        const displayName = p.name;
+        const hay = (p.name + ' ' + (p.pos || '') + ' ' + (p.school || '')).toLowerCase();
+        if (q && !hay.includes(q)) return;
+
+        const item = document.createElement('div');
+        item.className = 'combo-item';
+
+        const left = document.createElement('span');
+        left.textContent = displayName;
+        item.appendChild(left);
+
+        const meta = document.createElement('span');
+        const usedBy = used[normalizeName(p.name)];
+        if (usedBy) {
+          item.classList.add('disabled');
+          meta.className = 'used-tag';
+          meta.textContent = `picked at #${usedBy}`;
+        } else {
+          meta.className = 'player-meta';
+          const bits = [];
+          if (p.pos) bits.push(p.pos);
+          if (p.school) bits.push(p.school);
+          meta.textContent = bits.join(' · ');
+        }
+        item.appendChild(meta);
+
+        if (!item.classList.contains('disabled')) {
+          item.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            input.value = displayName;
+            updateHasValue();
+            closeMenu();
+            input.blur();
+            if (onChange) onChange();
+          });
+        } else {
+          item.addEventListener('mousedown', e => e.preventDefault());
+        }
+        menu.appendChild(item);
+        matchCount++;
+      });
+
+      if (matchCount === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'combo-empty';
+        empty.textContent = q
+          ? `No prospect matches "${input.value}". You can keep typing a custom name.`
+          : 'No prospects configured — commissioner can add them in Setup.';
+        menu.appendChild(empty);
+      }
+    }
+
+    function openMenu() { renderMenu(); wrap.classList.add('open'); }
+    function closeMenu() { wrap.classList.remove('open'); }
+
+    input.addEventListener('focus', openMenu);
+    input.addEventListener('input', () => {
+      updateHasValue();
+      renderMenu();
+      if (onChange) onChange();
+    });
+    input.addEventListener('blur', () => { setTimeout(closeMenu, 120); });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { closeMenu(); input.blur(); }
+    });
+    clearBtn.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      input.value = '';
+      updateHasValue();
+      input.focus();
+      renderMenu();
+      if (onChange) onChange();
+    });
+
+    wrap._setValue = (v) => { input.value = v || ''; updateHasValue(); };
+    wrap._input = input;
+
+    return wrap;
+  }
+
   function buildPickGrid() {
     const grid = document.getElementById('pickGrid');
-    // clear everything after the 3 header cells
     while (grid.children.length > 3) grid.removeChild(grid.lastChild);
     for (let i = 0; i < 32; i++) {
-      const num = document.createElement('div');
-      num.className = 'pick-num';
-      num.textContent = (i + 1);
-      const team = document.createElement('div');
-      team.className = 'team-col';
-      team.textContent = teams[i] || '—';
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'player-col pick-input';
-      input.placeholder = 'Player name';
-      input.dataset.idx = i;
-      input.setAttribute('list', 'prospectList');
-      input.autocomplete = 'off';
-      input.spellcheck = false;
-      grid.appendChild(num);
-      grid.appendChild(team);
-      grid.appendChild(input);
+      const num = document.createElement('div'); num.className = 'pick-num'; num.textContent = (i + 1);
+      const team = document.createElement('div'); team.className = 'team-col'; team.textContent = teams[i] || '—';
+      const combo = makeCombo({ kind: 'pick', idx: i });
+      grid.appendChild(num); grid.appendChild(team); grid.appendChild(combo);
     }
-    refreshProspectList();
   }
 
-  function refreshProspectList() {
-    const dl = document.getElementById('prospectList');
-    dl.innerHTML = '';
-    prospects.forEach(p => {
-      if (!p) return;
-      const opt = document.createElement('option');
-      opt.value = p;
-      dl.appendChild(opt);
-    });
-  }
-
-  // ------- Build actual-results grid (admin) -------
   function buildActualGrid() {
     const grid = document.getElementById('actualGrid');
     while (grid.children.length > 3) grid.removeChild(grid.lastChild);
     for (let i = 0; i < 32; i++) {
-      const num = document.createElement('div');
-      num.className = 'pick-num';
-      num.textContent = (i + 1);
-      const team = document.createElement('div');
-      team.className = 'team-col';
-      team.textContent = teams[i] || '—';
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'player-col actual-input';
-      input.placeholder = 'Actual pick (leave blank if not made yet)';
-      input.dataset.idx = i;
-      input.setAttribute('list', 'prospectList');
-      input.autocomplete = 'off';
-      input.spellcheck = false;
-      input.addEventListener('input', renderScoreboard);
-      grid.appendChild(num);
-      grid.appendChild(team);
-      grid.appendChild(input);
+      const num = document.createElement('div'); num.className = 'pick-num'; num.textContent = (i + 1);
+      const team = document.createElement('div'); team.className = 'team-col'; team.textContent = teams[i] || '—';
+      const combo = makeCombo({ kind: 'actual', idx: i, onChange: renderScoreboard });
+      grid.appendChild(num); grid.appendChild(team); grid.appendChild(combo);
     }
   }
 
-  // ------- Build setup grid -------
   function buildSetupGrid() {
     const grid = document.getElementById('setupGrid');
     grid.innerHTML = '';
     for (let i = 0; i < 32; i++) {
-      const num = document.createElement('div');
-      num.className = 'pick-num';
-      num.textContent = (i + 1);
+      const num = document.createElement('div'); num.className = 'pick-num'; num.textContent = (i + 1);
       const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'setup-team';
-      input.value = teams[i] || '';
-      input.dataset.idx = i;
-      input.addEventListener('input', () => {
-        teams[i] = input.value;
-      });
-      grid.appendChild(num);
-      grid.appendChild(input);
+      input.type = 'text'; input.className = 'setup-team';
+      input.value = teams[i] || ''; input.dataset.idx = i;
+      input.addEventListener('input', () => { teams[i] = input.value; });
+      grid.appendChild(num); grid.appendChild(input);
     }
-    document.getElementById('prospectsInput').value = prospects.join('\n');
+    document.getElementById('prospectsInput').value = prospects.map(serializeProspect).join('\n');
   }
 
-  // ------- Generate picks link -------
   document.getElementById('generateLink').addEventListener('click', () => {
     const name = (document.getElementById('playerName').value || '').trim();
-    if (!name) {
-      toast('Please enter your name first');
-      document.getElementById('playerName').focus();
-      return;
-    }
+    if (!name) { toast('Please enter your name first'); document.getElementById('playerName').focus(); return; }
     const inputs = document.querySelectorAll('.pick-input');
     const picks = [];
     inputs.forEach(inp => picks.push((inp.value || '').trim()));
     const filled = picks.filter(Boolean).length;
-    if (filled === 0) {
-      toast('Fill in at least one pick');
-      return;
-    }
-    const payload = { v: 1, n: name, p: picks };
+    if (filled === 0) { toast('Fill in at least one pick'); return; }
+    const payload = { v: 2, n: name, p: picks };
     const encoded = encodeData(payload);
-    // Preserve any existing config hash param
     const h = parseHash(window.location.hash);
     const parts = [];
     if (h.c) parts.push('c=' + h.c);
@@ -552,142 +661,107 @@ Jayden Daniels
     const url = window.location.origin + window.location.pathname + '#' + parts.join('&');
     const out = document.getElementById('linkOutput');
     const link = document.getElementById('shareLink');
-    link.value = url;
-    out.style.display = 'block';
-    link.select();
+    link.value = url; out.style.display = 'block'; link.select();
     toast(`Encoded ${filled} picks`);
   });
 
   document.getElementById('copyLink').addEventListener('click', async () => {
     const link = document.getElementById('shareLink');
     link.select();
-    try {
-      await navigator.clipboard.writeText(link.value);
-      toast('Link copied!');
-    } catch {
-      document.execCommand('copy');
-      toast('Link copied!');
-    }
+    try { await navigator.clipboard.writeText(link.value); toast('Link copied!'); }
+    catch { document.execCommand('copy'); toast('Link copied!'); }
   });
 
   document.getElementById('clearPicks').addEventListener('click', () => {
-    document.querySelectorAll('.pick-input').forEach(inp => inp.value = '');
+    document.querySelectorAll('.pick-input').forEach(inp => {
+      inp.value = '';
+      inp.closest('.combo-wrap')?.classList.remove('has-value');
+    });
     document.getElementById('playerName').value = '';
     document.getElementById('linkOutput').style.display = 'none';
     toast('Cleared');
   });
 
-  // ------- Generate config link -------
   document.getElementById('generateConfig').addEventListener('click', () => {
-    // Read teams from the setup inputs (authoritative)
-    document.querySelectorAll('.setup-team').forEach((inp, i) => {
-      teams[i] = (inp.value || '').trim();
-    });
-    prospects = (document.getElementById('prospectsInput').value || '')
-      .split('\n').map(s => s.trim()).filter(Boolean);
-    const payload = { v: 1, t: teams, pr: prospects };
+    document.querySelectorAll('.setup-team').forEach((inp, i) => { teams[i] = (inp.value || '').trim(); });
+    const lines = (document.getElementById('prospectsInput').value || '').split('\n');
+    prospects = lines.map(parseProspectLine).filter(Boolean);
+    const payload = { v: 2, t: teams, pr: prospects };
     const encoded = encodeData(payload);
     const url = window.location.origin + window.location.pathname + '#c=' + encoded;
     const out = document.getElementById('configOutput');
     const link = document.getElementById('configLink');
-    link.value = url;
-    out.style.display = 'block';
-    link.select();
-    // Also rebuild dependent UI
-    buildPickGrid();
-    buildActualGrid();
+    link.value = url; out.style.display = 'block'; link.select();
+    buildPickGrid(); buildActualGrid();
     toast('Config link ready');
   });
 
   document.getElementById('copyConfig').addEventListener('click', async () => {
     const link = document.getElementById('configLink');
     link.select();
-    try {
-      await navigator.clipboard.writeText(link.value);
-      toast('Config link copied!');
-    } catch {
-      document.execCommand('copy');
-      toast('Config link copied!');
-    }
+    try { await navigator.clipboard.writeText(link.value); toast('Config link copied!'); }
+    catch { document.execCommand('copy'); toast('Config link copied!'); }
   });
 
   document.getElementById('resetTeams').addEventListener('click', () => {
     teams = DEFAULT_TEAMS.slice();
-    buildSetupGrid();
-    buildPickGrid();
-    buildActualGrid();
+    buildSetupGrid(); buildPickGrid(); buildActualGrid();
     toast('Reset to 2026 order');
   });
 
-  // ------- Admin: Load friend entries -------
-  let entries = []; // [{name, picks: [..32..]}]
+  document.getElementById('resetProspects').addEventListener('click', () => {
+    prospects = DEFAULT_PROSPECTS.slice();
+    document.getElementById('prospectsInput').value = prospects.map(serializeProspect).join('\n');
+    toast('Reset to top-50 big board');
+  });
+
+  let entries = [];
 
   document.getElementById('loadFriends').addEventListener('click', () => {
     const text = document.getElementById('friendLinks').value || '';
     const lines = text.split('\n').map(s => s.trim()).filter(Boolean);
-    const loaded = [];
-    const errors = [];
+    const loaded = []; const errors = [];
     lines.forEach((line, i) => {
-      // Extract p= param from hash
       let p = '';
       const hashIdx = line.indexOf('#');
-      if (hashIdx >= 0) {
-        const h = parseHash(line.slice(hashIdx));
-        p = h.p || '';
-      } else {
-        // Maybe the whole line is just the encoded payload
-        p = line;
-      }
+      if (hashIdx >= 0) { p = parseHash(line.slice(hashIdx)).p || ''; } else { p = line; }
       const data = decodeData(p);
       if (data && Array.isArray(data.p)) {
         loaded.push({ name: (data.n || `Friend ${i+1}`).trim() || `Friend ${i+1}`, picks: data.p.slice(0, 32) });
-      } else {
-        errors.push(i + 1);
-      }
+      } else { errors.push(i + 1); }
     });
     entries = loaded;
     const count = document.getElementById('friendCount');
-    if (errors.length) {
-      count.innerHTML = `Loaded <strong>${loaded.length}</strong> entries · <span style="color: #ff7a7a;">skipped lines: ${errors.join(', ')}</span>`;
-    } else {
-      count.innerHTML = `Loaded <strong>${loaded.length}</strong> entries ✓`;
-    }
+    if (errors.length) count.innerHTML = `Loaded <strong>${loaded.length}</strong> entries · <span style="color: #ff7a7a;">skipped lines: ${errors.join(', ')}</span>`;
+    else count.innerHTML = `Loaded <strong>${loaded.length}</strong> entries ✓`;
     renderScoreboard();
   });
 
   document.getElementById('clearActual').addEventListener('click', () => {
-    document.querySelectorAll('.actual-input').forEach(i => i.value = '');
+    document.querySelectorAll('.actual-input').forEach(inp => {
+      inp.value = ''; inp.closest('.combo-wrap')?.classList.remove('has-value');
+    });
     renderScoreboard();
   });
 
-  // ------- Scoring -------
   function getActualPicks() {
     const arr = [];
-    document.querySelectorAll('.actual-input').forEach(inp => {
-      arr.push((inp.value || '').trim());
-    });
+    document.querySelectorAll('.actual-input').forEach(inp => arr.push((inp.value || '').trim()));
     return arr;
   }
 
   function scoreEntry(entry, actual) {
-    // Build normalized lookup: player name -> position index (first occurrence)
     const actualByName = {};
     actual.forEach((name, i) => {
       const norm = normalizeName(name);
       if (norm && !(norm in actualByName)) actualByName[norm] = i;
     });
-
-    const perPick = [];
-    let total = 0;
+    const perPick = []; let total = 0;
     for (let i = 0; i < 32; i++) {
       const predicted = entry.picks[i] || '';
       const norm = normalizeName(predicted);
       if (!norm) { perPick.push({ pts: 0, note: '—' }); continue; }
-      if (!(norm in actualByName)) {
-        // Player not in round 1 (or not entered yet)
-        perPick.push({ pts: 0, note: 'not in R1 / n/a' });
-        continue;
-      }
+      if (!(norm in actualByName)) { perPick.push({ pts: 0, note: 'not in R1 / n/a' }); continue; }
       const actualPos = actualByName[norm];
       const diff = Math.abs(actualPos - i);
       let pts = 0; let note = '';
@@ -706,58 +780,36 @@ Jayden Daniels
     const filledActual = actual.filter(Boolean).length;
     const lbDiv = document.getElementById('leaderboard');
     const bdDiv = document.getElementById('breakdown');
-
     if (entries.length === 0) {
       lbDiv.innerHTML = `<p class="muted">No entries loaded yet. Paste friend links above and click "Load Entries".</p>`;
-      bdDiv.innerHTML = '';
-      return;
+      bdDiv.innerHTML = ''; return;
     }
-
     const scored = entries.map(e => ({ ...e, ...scoreEntry(e, actual) }));
     scored.sort((a, b) => b.total - a.total);
-
     let html = `<p class="small">Actual picks entered: <strong>${filledActual}/32</strong></p>`;
-    html += `<table><thead><tr>
-      <th>#</th><th>Name</th><th>Score</th><th>Exact</th><th>±3</th><th>±5</th><th>R1</th>
-    </tr></thead><tbody>`;
+    html += `<table><thead><tr><th>#</th><th>Name</th><th>Score</th><th>Exact</th><th>±3</th><th>±5</th><th>R1</th></tr></thead><tbody>`;
     scored.forEach((s, i) => {
       const exact = s.perPick.filter(p => p.pts === 5).length;
       const w3 = s.perPick.filter(p => p.pts === 3).length;
       const w5 = s.perPick.filter(p => p.pts === 2).length;
       const r1 = s.perPick.filter(p => p.pts === 1).length;
-      html += `<tr class="${i===0 ? 'leader' : ''}">
-        <td>${i+1}</td>
-        <td><strong>${escapeHtml(s.name)}</strong></td>
-        <td><strong style="color: var(--gold); font-size: 16px;">${s.total}</strong></td>
-        <td>${exact}</td><td>${w3}</td><td>${w5}</td><td>${r1}</td>
-      </tr>`;
+      html += `<tr class="${i===0 ? 'leader' : ''}"><td>${i+1}</td><td><strong>${escapeHtml(s.name)}</strong></td><td><strong style="color: var(--gold); font-size: 16px;">${s.total}</strong></td><td>${exact}</td><td>${w3}</td><td>${w5}</td><td>${r1}</td></tr>`;
     });
     html += `</tbody></table>`;
     lbDiv.innerHTML = html;
-
-    // Breakdown
     let bh = '';
     scored.forEach(s => {
       bh += `<h3 style="margin-top:18px;">${escapeHtml(s.name)} — ${s.total} pts</h3>`;
       bh += `<table><thead><tr><th>#</th><th>Team</th><th>Prediction</th><th>Actual</th><th>Pts</th></tr></thead><tbody>`;
       for (let i = 0; i < 32; i++) {
-        const pred = s.picks[i] || '';
-        const act = actual[i] || '';
-        const p = s.perPick[i];
+        const pred = s.picks[i] || ''; const act = actual[i] || ''; const p = s.perPick[i];
         let pill = '';
         if (p.pts === 5) pill = `<span class="pill green">${p.pts}</span>`;
-        else if (p.pts === 3) pill = `<span class="pill orange">${p.pts}</span>`;
-        else if (p.pts === 2) pill = `<span class="pill orange">${p.pts}</span>`;
+        else if (p.pts === 3 || p.pts === 2) pill = `<span class="pill orange">${p.pts}</span>`;
         else if (p.pts === 1) pill = `<span class="pill muted">${p.pts}</span>`;
         else pill = `<span class="pill muted">0</span>`;
         const note = p.note ? `<span class="small"> · ${p.note}</span>` : '';
-        bh += `<tr>
-          <td>${i+1}</td>
-          <td class="small">${escapeHtml(teams[i] || '—')}</td>
-          <td>${escapeHtml(pred || '—')}</td>
-          <td>${escapeHtml(act || '—')}</td>
-          <td>${pill}${note}</td>
-        </tr>`;
+        bh += `<tr><td>${i+1}</td><td class="small">${escapeHtml(teams[i] || '—')}</td><td>${escapeHtml(pred || '—')}</td><td>${escapeHtml(act || '—')}</td><td>${pill}${note}</td></tr>`;
       }
       bh += `</tbody></table>`;
     });
@@ -765,12 +817,9 @@ Jayden Daniels
   }
 
   function escapeHtml(s) {
-    return (s || '').replace(/[&<>"']/g, c => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[c]));
+    return (s || '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
   }
 
-  // ------- Boot: load config and/or picks from URL hash -------
   function boot() {
     const h = parseHash(window.location.hash);
     if (h.c) {
@@ -778,27 +827,25 @@ Jayden Daniels
       if (cfg) {
         if (Array.isArray(cfg.t) && cfg.t.length) teams = cfg.t.slice(0, 32);
         while (teams.length < 32) teams.push('');
-        if (Array.isArray(cfg.pr)) prospects = cfg.pr.slice();
+        if (Array.isArray(cfg.pr)) {
+          prospects = cfg.pr.map(p => {
+            if (typeof p === 'string') return parseProspectLine(p) || { name: p, pos: '', school: '' };
+            return { name: p.name || '', pos: p.pos || '', school: p.school || '' };
+          }).filter(p => p.name);
+        }
       }
     }
-    buildPickGrid();
-    buildActualGrid();
-    buildSetupGrid();
-
+    buildPickGrid(); buildActualGrid(); buildSetupGrid();
     if (h.p) {
       const data = decodeData(h.p);
       if (data) {
         if (data.n) document.getElementById('playerName').value = data.n;
         if (Array.isArray(data.p)) {
-          const inputs = document.querySelectorAll('.pick-input');
-          data.p.forEach((v, i) => {
-            if (inputs[i]) inputs[i].value = v || '';
-          });
+          const wraps = document.querySelectorAll('#pickGrid .combo-wrap');
+          data.p.forEach((v, i) => { if (wraps[i]) wraps[i]._setValue(v); });
         }
       }
     }
-
-    // If URL explicitly says #admin or #setup, switch tab
     if (/(^|&|#)admin(&|$)/.test(window.location.hash)) setTab('admin');
     else if (/(^|&|#)setup(&|$)/.test(window.location.hash)) setTab('setup');
     else if (/(^|&|#)how(&|$)/.test(window.location.hash)) setTab('how');
