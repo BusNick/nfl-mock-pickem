@@ -253,7 +253,7 @@ https://yoursite.com/#p=..."></textarea>
   <div class="card">
     <h2>Setup (Commissioner)</h2>
     <div class="small">
-      Edit the team draft order and (optional) prospect autocomplete list, then generate a config link to share with your friends. Default order is alphabetical — <strong>reorder to match the actual 2026 NFL Draft order</strong> (including any trades).
+      Edit the team draft order and (optional) prospect autocomplete list, then generate a config link to share with your friends. Default order below reflects the <strong>actual 2026 NFL Draft order as of Apr 20, 2026</strong> (including trades). Edit if any picks get traded during the draft itself.
     </div>
   </div>
 
@@ -262,7 +262,7 @@ https://yoursite.com/#p=..."></textarea>
     <div class="small" style="margin-bottom: 10px;">Edit team names as needed. Reorder by cutting & pasting values.</div>
     <div class="setup-grid" id="setupGrid"></div>
     <div style="margin-top: 12px;">
-      <button class="secondary" id="resetTeams">Reset to alphabetical NFL</button>
+      <button class="secondary" id="resetTeams">Reset to 2026 draft order</button>
     </div>
   </div>
 
@@ -340,16 +340,40 @@ Jayden Daniels
 <div class="toast" id="toast"></div>
 
 <script>
-  // ------- Default team order (alphabetical) -------
+  // ------- 2026 NFL Draft order (source: Tankathon, as of Apr 20 2026) -------
   const DEFAULT_TEAMS = [
-    "Arizona Cardinals","Atlanta Falcons","Baltimore Ravens","Buffalo Bills",
-    "Carolina Panthers","Chicago Bears","Cincinnati Bengals","Cleveland Browns",
-    "Dallas Cowboys","Denver Broncos","Detroit Lions","Green Bay Packers",
-    "Houston Texans","Indianapolis Colts","Jacksonville Jaguars","Kansas City Chiefs",
-    "Las Vegas Raiders","Los Angeles Chargers","Los Angeles Rams","Miami Dolphins",
-    "Minnesota Vikings","New England Patriots","New Orleans Saints","New York Giants",
-    "New York Jets","Philadelphia Eagles","Pittsburgh Steelers","San Francisco 49ers",
-    "Seattle Seahawks","Tampa Bay Buccaneers","Tennessee Titans","Washington Commanders"
+    "Las Vegas Raiders",
+    "New York Jets",
+    "Arizona Cardinals",
+    "Tennessee Titans",
+    "New York Giants",
+    "Cleveland Browns",
+    "Washington Commanders",
+    "New Orleans Saints",
+    "Kansas City Chiefs",
+    "New York Giants (via CIN)",
+    "Miami Dolphins",
+    "Dallas Cowboys",
+    "Los Angeles Rams (via ATL)",
+    "Baltimore Ravens",
+    "Tampa Bay Buccaneers",
+    "New York Jets (via IND)",
+    "Detroit Lions",
+    "Minnesota Vikings",
+    "Carolina Panthers",
+    "Dallas Cowboys (via GB)",
+    "Pittsburgh Steelers",
+    "Los Angeles Chargers",
+    "Philadelphia Eagles",
+    "Cleveland Browns (via JAX)",
+    "Chicago Bears",
+    "Buffalo Bills",
+    "San Francisco 49ers",
+    "Houston Texans",
+    "Kansas City Chiefs (via LAR)",
+    "Miami Dolphins (via DEN)",
+    "New England Patriots",
+    "Seattle Seahawks"
   ];
 
   // ------- State -------
@@ -592,7 +616,7 @@ Jayden Daniels
     buildSetupGrid();
     buildPickGrid();
     buildActualGrid();
-    toast('Reset to alphabetical');
+    toast('Reset to 2026 order');
   });
 
   // ------- Admin: Load friend entries -------
