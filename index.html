@@ -374,6 +374,7 @@ Caleb Downs (S, Ohio State)
 
 <div class="toast" id="toast"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ------- 2026 NFL Draft order (Tankathon, as of Apr 20 2026) -------
   const DEFAULT_TEAMS = [
@@ -1026,6 +1027,173 @@ Caleb Downs (S, Ohio State)
     syncPicked();
     setInterval(syncPicked, 500);
   })();
+
+  
+  // ==== Supabase Shared Leaderboard ====
+  const SB_URL = 'https://qiauvyytuevojpqwcrpv.supabase.co';
+  const SB_KEY = 'sb_publishable_io89pWPVPvs0JCdUMZ2Xdg_MLK9FodL';
+  const SB_FN  = SB_URL + '/functions/v1/swift-function';
+  const LEAGUE_ID = 'default';
+  const SB = (window.supabase && window.supabase.createClient)
+    ? window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false } })
+    : null;
+
+  async function sbHydrateEntries() {
+    if (!SB) return;
+    const { data, error } = await SB.from('entries').select('*').eq('league_id', LEAGUE_ID);
+    if (error || !data) return;
+    entries.length = 0;
+    for (const e of data) {
+      let arr;
+      if (Array.isArray(e.picks)) arr = e.picks;
+      else { arr = []; for (let i=0;i<32;i++) arr.push(e.picks[i] || e.picks[String(i)] || ''); }
+      entries.push({ name: e.name, picks: arr });
+    }
+    if (typeof renderScoreboard === 'function') renderScoreboard();
+  }
+
+  async function sbHydrateActuals() {
+    if (!SB) return;
+    const { data } = await SB.from('actual_picks').select('picks').eq('league_id', LEAGUE_ID).maybeSingle();
+    if (!data || !data.picks) return;
+    const picks = data.picks;
+    const inputs = document.querySelectorAll('#tab-admin input[placeholder="Click to select…"]');
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+    inputs.forEach((inp, i) => {
+      const val = Array.isArray(picks) ? (picks[i] || '') : (picks[i] || picks[String(i)] || '');
+      if (val && inp.value !== val) {
+        setter.call(inp, val);
+        inp.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+    if (typeof renderScoreboard === 'function') renderScoreboard();
+  }
+
+  if (SB) {
+    SB.channel('league:' + LEAGUE_ID)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'entries',      filter: 'league_id=eq.' + LEAGUE_ID }, () => sbHydrateEntries())
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'actual_picks', filter: 'league_id=eq.' + LEAGUE_ID }, () => sbHydrateActuals())
+      .subscribe();
+  }
+
+  // Autosave actual picks on Admin tab
+  let __actualSaveTimer;
+  document.addEventListener('input', (ev) => {
+    const admin = document.getElementById('tab-admin');
+    if (!admin || !admin.contains(ev.target)) return;
+    if (!(ev.target instanceof HTMLInputElement)) return;
+    if (ev.target.placeholder !== 'Click to select…') return;
+    clearTimeout(__actualSaveTimer);
+    __actualSaveTimer = setTimeout(async () => {
+      if (!SB || typeof getActualPicks !== 'function') return;
+      const arr = getActualPicks();
+      await SB.from('actual_picks').upsert({ league_id: LEAGUE_ID, picks: arr }, { onConflict: 'league_id' });
+    }, 500);
+  }, true);
+
+  // Mount Email field + Submit button on Make Picks
+  function __mountSubmitUI() {
+    const picksTab = document.getElementById('tab-picks');
+    if (!picksTab) return;
+    if (document.getElementById('email-wrap')) return;
+    const nameInput = picksTab.querySelector('input[placeholder*="Bus"]');
+    if (!nameInput) return;
+
+    // Hide existing share section
+    const shareHeading = [...picksTab.querySelectorAll('h1,h2,h3,h4')].find(h => /Share Your Picks/i.test(h.textContent));
+    if (shareHeading) {
+      const c = shareHeading.closest('section, .panel, .card') || shareHeading.parentElement;
+      if (c) c.style.display = 'none';
+    }
+
+    const wrap = document.createElement('div');
+    wrap.id = 'email-wrap';
+    wrap.style.cssText = 'margin:12px 0 0;';
+    wrap.innerHTML = '<label style="display:block;color:var(--muted);font-size:12px;margin:0 0 4px;">Your Email</label><input id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" style="width:100%;padding:10px 12px;background:var(--panel-2);border:1px solid var(--border);border-radius:8px;color:var(--text);font:inherit;">';
+    nameInput.closest('div,label')?.parentElement?.appendChild(wrap) || nameInput.after(wrap);
+    // Try a simpler path: just insert after the name input directly
+    if (!document.getElementById('emailInput')) nameInput.parentElement.appendChild(wrap);
+
+    // Prefill from localStorage
+    try {
+      const savedName = localStorage.getItem('mp.name');
+      const savedEmail = localStorage.getItem('mp.email');
+      if (savedName && !nameInput.value) nameInput.value = savedName;
+      const ei = document.getElementById('emailInput');
+      if (savedEmail && ei) ei.value = savedEmail;
+    } catch(e){}
+
+    const btnWrap = document.createElement('div');
+    btnWrap.id = 'submit-wrap';
+    btnWrap.style.cssText = 'margin:20px 0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;';
+    btnWrap.innerHTML = '<button id="submitPicksBtn" type="button" style="padding:12px 24px;background:var(--accent);border:none;border-radius:8px;color:white;font:inherit;font-weight:600;cursor:pointer;font-size:15px;">Submit Picks</button><span id="submitStatus" style="color:var(--muted);font-size:13px;"></span>';
+    picksTab.appendChild(btnWrap);
+    document.getElementById('submitPicksBtn').addEventListener('click', __onSubmit);
+  }
+
+  async function __onSubmit() {
+    const picksTab = document.getElementById('tab-picks');
+    const name = picksTab.querySelector('input[placeholder*="Bus"]').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const status = document.getElementById('submitStatus');
+    const btn = document.getElementById('submitPicksBtn');
+    if (!name) { status.textContent = 'Enter your name first.'; return; }
+    if (!email || !email.includes('@')) { status.textContent = 'Enter a valid email.'; return; }
+
+    const inputs = picksTab.querySelectorAll('input[placeholder="Click to select…"]');
+    const picks = [...inputs].map(i => i.value.trim());
+    const filled = picks.filter(p => p).length;
+    if (filled < 32 && !confirm('You have ' + filled + '/32 picks filled. Submit anyway?')) return;
+
+    try { localStorage.setItem('mp.name', name); localStorage.setItem('mp.email', email); } catch(e){}
+
+    btn.disabled = true;
+    status.textContent = 'Submitting…';
+    try {
+      if (!SB) throw new Error('Supabase client not loaded');
+      // Upsert: find existing by name (case-insensitive) or insert
+      const { data: existing } = await SB.from('entries')
+        .select('id').eq('league_id', LEAGUE_ID).ilike('name', name).maybeSingle();
+      if (existing && existing.id) {
+        const { error } = await SB.from('entries').update({ name, email, picks }).eq('id', existing.id);
+        if (error) throw error;
+      } else {
+        const { error } = await SB.from('entries').insert({ league_id: LEAGUE_ID, name, email, picks });
+        if (error) throw error;
+      }
+      status.textContent = 'Saved ✓ — sending confirmation email…';
+
+      const res = await fetch(SB_FN, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY },
+        body: JSON.stringify({ to: email, name, picks, teams }),
+      });
+      if (res.ok) {
+        status.textContent = 'Submitted ✓ — confirmation email sent to ' + email;
+      } else {
+        status.textContent = 'Picks saved ✓ — email delivery may be delayed.';
+      }
+      if (typeof toast === 'function') toast('Picks submitted!');
+    } catch (e) {
+      status.textContent = 'Error: ' + (e.message || String(e));
+      console.error(e);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function __hideAdminPasteSection() {
+    const admin = document.getElementById('tab-admin');
+    if (!admin) return;
+    const h = [...admin.querySelectorAll('h1,h2,h3,h4')].find(x => /Paste Friends/i.test(x.textContent));
+    if (h) {
+      const c = h.closest('section, .panel, .card') || h.parentElement;
+      if (c) c.style.display = 'none';
+    }
+  }
+
+  // Kick off once DOM is ready
+  setTimeout(() => { __mountSubmitUI(); __hideAdminPasteSection(); if (SB) { sbHydrateEntries(); sbHydrateActuals(); } }, 200);
 
   boot();
 </script>
