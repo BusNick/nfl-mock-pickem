@@ -874,7 +874,7 @@ Caleb Downs (S, Ohio State)
     const scored = entries.map(e => ({ ...e, ...scoreEntry(e, actual) }));
     scored.sort((a, b) => b.total - a.total);
     let html = `<p class="small">Actual picks entered: <strong>${filledActual}/32</strong></p>`;
-    html += `<table><thead><tr><th>#</th><th>Name</th><th>Score</th><th>Exact</th><th>±3</th><th>±5</th><th>R1</th></tr></thead><tbody>`;
+    html += `<table><thead><tr><th>#</th><th>Name</th><th>Score</th><th>Exact</th><th>±3</th><th>±5</th><th>R1 only</th></tr></thead><tbody>`;
     scored.forEach((s, i) => {
       const exact = s.perPick.filter(p => p.pts === 5).length;
       const w3 = s.perPick.filter(p => p.pts === 3).length;
@@ -1193,7 +1193,31 @@ Caleb Downs (S, Ohio State)
   }
 
   // Kick off once DOM is ready
-  setTimeout(() => { __mountSubmitUI(); __hideAdminPasteSection(); if (SB) { sbHydrateEntries(); sbHydrateActuals(); } }, 200);
+  
+  function __applyPublishMode() {
+    const isAdmin = /[?&]admin=1\b/.test(location.search) || /(^|&)admin=1(&|$)/.test(location.hash);
+    if (isAdmin) return;
+    // Rename Admin/Scoreboard tab
+    const adminBtn = [...document.querySelectorAll('button')].find(b => /Admin\s*\/\s*Scoreboard/i.test(b.textContent || ''));
+    if (adminBtn) adminBtn.textContent = 'Leaderboard';
+    // Hide Actual Draft Results section (commissioner only)
+    const admin = document.getElementById('tab-admin');
+    if (admin) {
+      const h = [...admin.querySelectorAll('h1,h2,h3,h4')].find(x => /Actual Draft Results/i.test(x.textContent));
+      if (h) {
+        const c = h.closest('section, .panel, .card') || h.parentElement;
+        if (c) c.style.display = 'none';
+      }
+    }
+    // Hide Setup (Commissioner) tab
+    const setupBtn = [...document.querySelectorAll('button')].find(b => /Setup\s*\(Commissioner\)/i.test(b.textContent || ''));
+    if (setupBtn) setupBtn.style.display = 'none';
+    // Also hide the corresponding pane if user already nav'd there
+    const setupPane = document.getElementById('tab-setup');
+    if (setupPane) setupPane.style.display = 'none';
+  }
+
+  setTimeout(() => { __mountSubmitUI(); __hideAdminPasteSection(); __applyPublishMode(); if (SB) { sbHydrateEntries(); sbHydrateActuals(); } }, 200);
 
   boot();
 </script>
